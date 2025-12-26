@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>My weather App</title>
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+   <form onsubmit="getweather();return false;">
+      <div>
+         <div>
+            <label htmlFor="city">City Name:</label>
+         </div>
+      <input type="text" name="cityname" id="cityname"  placeholder="enter your city name">
+      </div>
+           <button  type="submit">Weather</button>
+   </form>
+
+<h1 id="resu">
+
+</h1>
+
+   <script>
+      function getweather()
+      {
+         let cityname=document.getElementById("cityname").value;
+       
+         axios.get(`https://api.weatherapi.com/v1/current.json?key=8a6c518bd84c45b2b42103239250812&q=${cityname}&aqi=yes`)
+         
+   
+  .then( (response)=> {
+    // handle success
+    console.log(response);
+    console.log(response.data);
+    console.log(response.data.location);
+     console.log(response.data.location.name);
+     console.log(response.data.current.temp_c);
+         document.writeln(` city name is : ${response.data.location.name} <br>`);
+     document.writeln(` temp is : ${response.data.current.temp_c} <br>`);
+     document.getElementById("resu").innerHTML=(` tmep is   ${response.data.current.temp_c} `);
+   
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+      
+
+
+
+      }
+
+      //
+      let table=prompt("enter table name")
+
+for(let i=1;i<=10;i++)
+    {
+        console.log(table+"*"+i+"="+ table*i);
+      
+      
+      }
+
+
+
+   </script>
+   
+</body>
+</html>
